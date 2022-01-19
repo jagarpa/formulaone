@@ -1,0 +1,12 @@
+.even {
+  background-color: rgb(214, 214, 214);
+}
+
+.odd {
+  background-color: rgb(75, 75, 75);
+  color: white;
+}
+
+th.order {
+  cursor: pointer;
+}

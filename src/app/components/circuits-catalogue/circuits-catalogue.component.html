@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Circuitos</h1>
+  <div class="d-flex">
+    <input type="text" [(ngModel)]="filterSearch" (change)="search($any($event.target).value)" class="form-control m-1"
+      name="filterDesc" id="circuitfilter" placeholder="Buscar el la lista" />
+    <input type="number" [(ngModel)]="filterYear" class="form-control m-1" name="year" id="year"
+      placeholder="Mostrar circuitos por temporada" />
+    <!-- Preguntar a Castillo lo del $any -->
+    <!-- ngModel contiene el valor del input -->
+  </div>
+  <div class="circuit-name fs-2 text-center mt-4" role="alert"></div>
+
+  <button class="btn btn-outline-dark order" (click)="circuitsSortBy('id')">
+    Ordenar por Id
+  </button>
+  <button class="btn btn-outline-dark order ms-3" (click)="circuitsSortBy('name')">
+    Ordenar por Nombre
+  </button>
+</div>
+<div class="container d-flex flex-wrap mt-4">
+  <app-circuit-individual [c]="circuit" *ngFor="let circuit  of circuitsList | circuitFilter:filterSearch; let odd = odd; let even = even;"></app-circuit-individual>
+</div>
