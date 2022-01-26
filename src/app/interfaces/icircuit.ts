@@ -4,4 +4,5 @@ export interface ICircuit {
   url: string;
   Location: any;
   image: string;
+  like: boolean;
 }

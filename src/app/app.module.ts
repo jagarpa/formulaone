@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -15,7 +14,9 @@ import { CircuitOrderAZPipe } from './pipes/circuit-order-az.pipe';
 import { CircuitIndividualComponent } from './components/circuit-individual/circuit-individual.component';
 import { CircuitDetailComponent } from './components/circuit-detail/circuit-detail.component';
 import { MapComponent } from './components/map/map.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +30,18 @@ import { MapComponent } from './components/map/map.component';
     CircuitIndividualComponent,
     CircuitDetailComponent,
     MapComponent,
+    LoginComponent,
+    RegisterComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, //Get data from server API
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
-  providers: [CircuitsService],
+  providers: [CircuitsService, {provide: Storage, useValue: localStorage}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

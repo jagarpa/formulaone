@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IMRData } from '../interfaces/imrdata';
-import { map } from 'rxjs';
+import { debounceTime, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class CircuitsService {
     }));
   }
 
-  getCircuitById(id: string) {
+  getCircuitById(id: string | undefined) {
     const URL = 'http://ergast.com/api/f1/circuits/'+id+'.json';
     return this.http.get<IMRData>(URL).pipe(map(circuits => {
       return circuits.MRData.CircuitTable.Circuits

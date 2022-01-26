@@ -1,4 +1,5 @@
-<div *ngFor="let item of circuit">
-  <p>{{item.circuitName}}</p>
-  <app-map></app-map>
+<p>{{ circuit?.circuitName }}</p>
+<div class="d-flex justify-content-end">
+  <button (click)="likeCircuit(circuit!.circuitId)" [ngClass]="this.like === true? 'btn btn-danger': 'btn btn-secondary'" id="like">{{buttonMessage}}</button>
 </div>
+<app-map></app-map>

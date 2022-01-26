@@ -1,4 +1,4 @@
-<div class="container mt-4 animate__animated animate__fadeInDown">
+<div id="navbar" [ngClass]="(!show) ? 'd-none' : 'd-block container mt-4 animate__animated animate__fadeInDown'">
   <ul class="nav nav-pills">
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" [routerLink]="['home']" [routerLinkActive]="['active']">Home</a>
@@ -10,7 +10,7 @@
       <a class="nav-link" href="#">Link</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      <a (click)="logOut()" class="nav-link" href="#" tabindex="-1" aria-disabled="true">Logout</a>
     </li>
   </ul>
 </div>

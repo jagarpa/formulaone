@@ -1,8 +1,20 @@
-<div class="card h-100 text-center" style="width: 20rem;">
-      <img [src]="c?.image" class="img-fluid rounded-start" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{c?.circuitName}}</h5>
-        <button class="btn btn-outline-danger" (click)="circuitDetails(c!.circuitId)">+ información</button>
-        <p class="card-text"><small class="text-muted">Id: {{c?.circuitId}}</small></p>
-      </div>
+<div class="card h-100 text-center" style="width: 20rem">
+  <img [src]="c?.image" class="img-fluid rounded-start" alt="..." />
+
+  <div class="card-body">
+    <h5 class="card-title fs-4">{{ c?.circuitName }}</h5>
+
+    <div>
+      <button
+        class="btn btn-outline-dark ms-2"
+        (click)="circuitDetails(c!.circuitId)"
+      >
+        + información
+      </button>
+    </div>
+
+    <p class="card-text">
+      <small class="text-muted">Id: {{ c?.circuitId }}</small>
+    </p>
+  </div>
 </div>
