@@ -35,9 +35,9 @@ export class FirebaseService {
   app = initializeApp(this.firebaseConfig);
   database = getDatabase(this.app);
 
-  async getLikeCircuit(user: string) {
+  async getLikeCircuit() {
     const consulta = await fetch(
-      this.firebaseConfig.databaseURL + '/users/' + user + '/circuits.json'
+      this.firebaseConfig.databaseURL + '/users/' + this.getSplitEmail() + '/circuits.json'
     );
     const data = await consulta.json();
     const array = Object.entries(data);
@@ -47,9 +47,10 @@ export class FirebaseService {
     return likedCircuits;
   }
 
-  getCircuitLikes(user: string, id: string | undefined) {
+  getCircuitLikes(id: string | undefined) {
+
     const URL =
-      this.firebaseConfig.databaseURL + '/users/' + user + '/circuits.json';
+      this.firebaseConfig.databaseURL + '/users/' + this.getSplitEmail() + '/circuits.json';
     return this.http.get<CircuitLikeId>(URL).pipe(
       map((response) => {
         return Object.entries(response).map((e) => {
@@ -59,16 +60,16 @@ export class FirebaseService {
     );
   }
 
-  checkLikeCircuit(user: string, circuit: string) {
-    this.getCircuitLikesWithHash(user).subscribe((response) => {
+  checkLikeCircuit(circuit: string) {
+    this.getCircuitLikesWithHash().subscribe((response) => {
       const idList = response.map((e: string) => {
         return e[0];
       })
       if (idList.indexOf(circuit) === -1) {
         console.log("SET")
-        this.setLikeCircuitInDb(user, circuit)
+        this.setLikeCircuitInDb(circuit)
         setTimeout(() => {
-          this.getCircuitLikesWithOutHash(user).subscribe((response) => {
+          this.getCircuitLikesWithOutHash().subscribe((response) => {
             console.log(response)
           })
         }, 500);
@@ -76,9 +77,9 @@ export class FirebaseService {
         console.log("DELETE")
         const position = idList.indexOf(circuit) //Position to delete
         const hash = response[position][1] //Hash of firebase element
-        this.deleteLikeCircuitInDb(user, hash) //Delete function
+        this.deleteLikeCircuitInDb(hash) //Delete function
         setTimeout(() => {
-          this.getCircuitLikesWithOutHash(user).subscribe((response) => {
+          this.getCircuitLikesWithOutHash().subscribe((response) => {
             console.log(response)
           })
         }, 500);
@@ -86,8 +87,8 @@ export class FirebaseService {
     })
   }
 
-  private getCircuitLikesWithOutHash(user: string): Observable<any> {
-    const URL = this.firebaseConfig.databaseURL + '/users/' + user + '/circuits.json'
+  private getCircuitLikesWithOutHash(): Observable<any> {
+    const URL = this.firebaseConfig.databaseURL + '/users/' + this.getSplitEmail() + '/circuits.json'
     return this.http.get<any>(URL).pipe(map((response) => {
       return Object.entries(response).map((element: any) => {
         return element[1].id
@@ -95,8 +96,8 @@ export class FirebaseService {
     }))
   }
 
-  private getCircuitLikesWithHash(user: string): Observable<any> {
-    const URL = this.firebaseConfig.databaseURL + '/users/' + user + '/circuits.json'
+  private getCircuitLikesWithHash(): Observable<any> {
+    const URL = this.firebaseConfig.databaseURL + '/users/' + this.getSplitEmail() + '/circuits.json'
     return this.http.get<any>(URL).pipe(map((response) => {
       return Object.entries(response).map((element: any) => {
         return [element[1].id, element[0]];
@@ -104,19 +105,19 @@ export class FirebaseService {
     }))
   }
 
-  private setLikeCircuitInDb(user: string, circuit: string) {
-    const list = ref(this.database, '/users/' + user + '/circuits/');
+  private setLikeCircuitInDb(circuit: string) {
+    const list = ref(this.database, '/users/' + this.getSplitEmail() + '/circuits/');
       const newRow = push(list);
       set(newRow, {
         id: circuit,
       });
   }
 
-  private deleteLikeCircuitInDb(user: string, hash: string) {
+  private deleteLikeCircuitInDb(hash: string) {
     fetch(
       this.firebaseConfig.databaseURL +
         '/users/' +
-        user +
+        this.getSplitEmail() +
         '/circuits/' +
         hash +
         '.json',
@@ -125,6 +126,14 @@ export class FirebaseService {
         headers: { 'Content-type': 'application/json; charset=UTF-8' },
       }
     );
+  }
+
+  private getSplitEmail() {
+    const user = localStorage.getItem('user');
+    let email = JSON.parse(user!).email;
+    let arr = email.split("@")
+    let emailDivided = arr[0]
+    return emailDivided;
   }
 
 }

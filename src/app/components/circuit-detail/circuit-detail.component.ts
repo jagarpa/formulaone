@@ -31,7 +31,7 @@ export class CircuitDetailComponent implements OnInit {
   loadCircuit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id')!; //Recuperamos el Id
     this.firebaseService
-      .getCircuitLikes('20452214Q', this.id)
+      .getCircuitLikes(this.id)
       .subscribe((response) => {
         response.indexOf(this.circuit?.circuitId) > -1
           ? this.buttonLikeToTrue()
@@ -45,7 +45,7 @@ export class CircuitDetailComponent implements OnInit {
   }
 
   likeCircuit(id: string) {
-    this.firebaseService.checkLikeCircuit('20452214Q', id);
+    this.firebaseService.checkLikeCircuit(id);
     this.like ? this.buttonLikeToFalse() : this.buttonLikeToTrue();
   }
 

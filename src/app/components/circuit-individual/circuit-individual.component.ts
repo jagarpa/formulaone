@@ -27,7 +27,7 @@ export class CircuitIndividualComponent implements OnInit {
   }
 
   checkLike() {
-    this.firebase.getCircuitLikes("20452214Q", this.c?.circuitId).subscribe((e) => {
+    this.firebase.getCircuitLikes(this.c?.circuitId).subscribe((e) => {
       e.map((elemento: string | undefined) => {
         if (this.c?.circuitId === elemento) {
           this.c!.like = true;

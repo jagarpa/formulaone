@@ -10,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 
 export class LoginComponent implements OnInit {
-  user: User = { name: "", password: "", token: "" }
+  user: User = { name: "", password: "", token: "", dni: "" , email: ""}
   email: string | undefined;
   password: string | undefined;
   windowSizes: number[] = this.windowSize();
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       if (response.user != undefined) {
         response.user.getIdToken()
           .then((data) => {
-            this.setUser(this.email!, this.password!, data)
+            this.setUser("pirlo minga", this.email!, this.password!, data)
           })
       } else {
         this.errorMessage = response.toString()
@@ -42,12 +42,13 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  setUser(email: string, password: string, token: string) {
-    this.user.name = email;
+  setUser(name: string, email: string, password: string, token: string) {
+    this.user.name = name;
+    this.user.email = email;
     this.user.password = password;
     this.user.token = token;
     const jsonUser = JSON.stringify(this.user)
-    localStorage.setItem('token', token)
+    localStorage.setItem('user', jsonUser)
   }
 
   windowSize() {
