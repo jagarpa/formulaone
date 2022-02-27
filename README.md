@@ -154,6 +154,6 @@ En la página "detail" de un constructor, podemos encontrar:
 Desde el navbar podemos controlar el idioma, cerrar sesión y las diferentes páginas de nuestra SPA.
 
 
-## autor
+## Autor
 
 Javier García Pardo para la asignatura de Desarrollo de aplicaciones en entorno cliente.
