@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile, UserCredential } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
-import { from, Observable } from 'rxjs';
+import { BehaviorSubject, from, map, Observable, Subject, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/user';
 
@@ -12,71 +12,84 @@ import { User } from '../interfaces/user';
 })
 
 export class UsersService {
-  constructor(private http: HttpClient) { }
 
+  constructor(private http: HttpClient) {
+   }
 
-  firebaseConfig = {
+  private loggedIn = new BehaviorSubject<boolean>(false)
+
+  private firebaseConfig = {
     apiKey: environment.firebaseConfig.apiKey,
     authDomain: environment.firebaseConfig.authDomain,
     databaseURL: environment.firebaseConfig.databaseURL,
   };
+  private app = initializeApp(this.firebaseConfig);
+  private database = getDatabase(this.app);
 
-  app = initializeApp(this.firebaseConfig);
-  database = getDatabase(this.app);
+  get isLoggedIn() {
+    return this.loggedIn.asObservable() //Mostrar/Ocultar menu en Login
+  }
 
-  getToken(email: string, password: string): Observable<UserCredential> {
+  getToken(user: User): Observable<UserCredential> {
     const auth = getAuth(this.app)
-    return from(signInWithEmailAndPassword(auth, email, password)
+    return from(signInWithEmailAndPassword(auth, user.email, user.password)
     .catch((error) => {
       return error
     }))
   }
 
+checkNickname(user: User) {
+    const URL = this.firebaseConfig.databaseURL + `/users.json`;
+    return this.http.get(URL).pipe(
+      map((response) => {
+        return Object.entries(response).map((e: any) => {
+          return [e[1].nickname, e[1].email]
+        })
+      })
+    );
+  }
+
   signOut() {
     const auth = getAuth(this.app)
+    localStorage.removeItem("user")
     auth.signOut()
+    this.loggedIn.next(false)
   }
 
   isAuth() {
     const user = localStorage.getItem('user');
     let token = JSON.parse(user!).token;
     if(token.length > 0) {
+      this.loggedIn.next(true)
       return true;
     }
+    this.loggedIn.next(false)
     return false;
   }
 
-  newUser(newUser: User) {
+  newUser(user: User) {
     const auth = getAuth(this.app)
-    return from(createUserWithEmailAndPassword(auth, newUser.email, newUser.password).then(()=> {
-      this.setEmail(newUser.email)
+    return from(createUserWithEmailAndPassword(auth, user.email, user.password).then((res)=> {
+      this.setDatabaseStructure(user)
+      return res;
     })
-    .catch((error) => {return error}))
+    .catch((error) => {console.log(error)}))
   }
 
-  setDisplayName(name: string) {
-    const auth = getAuth(this.app)
-    return from(updateProfile(auth.currentUser!, {
-      displayName: name, photoURL: "./assets/helmets/undefined.png"
+  private setDatabaseStructure(user: User) {
+    from(set(ref(this.database, '/users/'+user.nickname), {
+      nickname: user.nickname,
+      email: user.email,
+      image: "./assets/img/helmets/0.png"
     }))
-  }
-
-  private setEmail(email: string) {
-    let arr = email.split("@")
-    let emailDivided = arr[0]
-    from(set(ref(this.database, '/users/'+emailDivided), {
-      email: email
-    }))
-    from(set(ref(this.database, '/users/'+emailDivided+'/circuits/'), {
+    from(set(ref(this.database, '/users/'+user.nickname+'/circuits/'), {
       id: "valor 0"
     }))
-    from(set(ref(this.database, '/users/'+emailDivided+'/drivers/'), {
+    from(set(ref(this.database, '/users/'+user.nickname+'/drivers/'), {
       id: "valor 0"
     }))
-    from(set(ref(this.database, '/users/'+emailDivided+'/constructors/'), {
+    from(set(ref(this.database, '/users/'+user.nickname+'/constructors/'), {
       id: "valor 0"
     }))
   }
-
-
 }

@@ -1,0 +1,51 @@
+<div class="container mt-4 mb-5">
+  <div class="d-flex flex-wrap justify-content-between">
+    <!-- Pipes per defecte -->
+    <h1 class="display-4 text-white">{{'constructores' | translate | uppercase}}</h1>
+  </div>
+  <div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-center align-self-end">  <button
+      class="btn btn-outline-light order m-2"
+      (click)="constructorsSortBy('name')"
+    >
+    {{ 'ordenapornombre' | translate }}
+    </button>
+</div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+      <label class="form-label text-white" for="filterDesc">{{'buscarpornombre' | translate}}</label> <input
+      type="text"
+      [(ngModel)]="filterSearch"
+      (change)="search($any($event.target).value)"
+      class="form-control"
+      name="filterDesc"
+      id="constructorFilter"
+      placeholder=""
+    /></div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+      <label class="form-label text-white" for="year">{{'buscarportemporada' | translate}}</label>
+      <input
+      type="number"
+      [(ngModel)]="filterYear"
+      class="form-control"
+      name="year"
+      id="year"
+      placeholder="1975 - 2021"
+    /></div>
+  </div>
+  <div
+    class="circuit-name display-6 text-white fs-2 text-center mt-4"
+    role="alert"
+  ></div>
+  <div class="d-flex flex-wrap mt-4 justify-content-center">
+        <!-- *ngFor  -->
+    <app-constructor-individual
+      [t]="constructor"
+      *ngFor="
+        let constructor of constructorsList | constructorFilter: filterSearch;
+        let odd = odd;
+        let even = even;
+        let i = index
+      "
+    ></app-constructor-individual>
+  </div>
+</div>

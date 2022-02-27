@@ -1,10 +1,58 @@
-<div class="register">
-  <form class="custom-form" method="post">
-    <h1>Register</h1>
-    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required="required" />
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required="required" />
-    <input type="password" [(ngModel)]="confirmPass" name="password" placeholder="Repeat the password"
-      required="required" />
-    <button type="submit" (click)="registerNewUser()">Register</button>
+<div class="d-flex flex-column container align-items-center mt-4">
+
+  <div class="text-white display-1">{{ "registro" | translate | uppercase }}
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="userSubmit()" class="d-flex flex-column w-50 mt-2">
+      <!-- *ngIf -->
+      <!-- Formularis reactius -->
+      <mat-form-field>
+        <input matInput formControlName="name" type="text" placeholder="{{ 'nombre' | translate }}" />
+        <mat-error *ngIf="this.form.controls['name'].hasError('minlength')">{{
+          "minimo3" | translate
+          }}</mat-error>
+        <mat-error *ngIf="this.form.controls['name'].hasError('required')">{{
+          "camporequerido" | translate
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="username" type="text" placeholder="{{ 'nickname' | translate }}" />
+        <mat-error *ngIf="this.form.controls['username'].hasError('minlength')">{{ "minimo6" | translate }}</mat-error>
+        <mat-error *ngIf="this.form.controls['username'].hasError('required')">{{ "camporequerido" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="email" type="text" placeholder="{{ 'email' | translate }}" />
+        <mat-error *ngIf="this.form.controls['email'].hasError('email')">{{
+          "emailvalido" | translate
+          }}</mat-error>
+        <mat-error *ngIf="this.form.controls['email'].hasError('required')">{{
+          "camporequerido" | translate
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="password" type="password" placeholder="{{ 'password' | translate }}" />
+        <mat-error *ngIf="this.form.controls['password'].hasError('formatValidator')">{{ "passwordformato" | translate
+          }}</mat-error>
+        <mat-error *ngIf="this.form.controls['password'].hasError('required')">{{ "camporequerido" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field s>
+        <input matInput formControlName="confirmPassword" type="password"
+          placeholder="{{ 'repassword' | translate }}" />
+        <mat-error *ngIf="this.form.controls['confirmPassword'].hasError('matching')">{{ "mismopassword" | translate }}
+        </mat-error>
+        <mat-error *ngIf="this.form.controls['confirmPassword'].hasError('required')">{{ "camporequerido" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button [disabled]="!this.form.valid" type="submit" class="w-100 mb-4 align-self-end">
+        {{ "newUser" | translate }}
+      </button>
   </form>
+
 </div>

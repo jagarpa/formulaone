@@ -1,5 +1,14 @@
-<p>{{ circuit?.circuitName }}</p>
-<div class="d-flex justify-content-end">
-  <button (click)="likeCircuit(circuit!.circuitId)" [ngClass]="this.like === true? 'btn btn-danger': 'btn btn-secondary'" id="like">{{buttonMessage}}</button>
+
+<div class=" container d-flex justify-content-around align-items-center flex-wrap mt-4 text-center">
+  <div class="display-6 text-light mt-3">{{circuit?.circuitName}}</div>
+  <div class="fs-3 text-secondary mt-3">Ciudad: {{circuit?.Location.locality}}</div>
+  <div class="fs-3 text-secondary mt-3">Pais: {{circuit?.Location.country}}</div>
+  <button
+  mat-fab
+  (click)="likeCircuit(circuit!.circuitId)"
+  [color]="this.like === true ? 'warn' : 'basic'"
+>
+  <mat-icon>favorite</mat-icon>
+</button>
 </div>
 <app-map></app-map>

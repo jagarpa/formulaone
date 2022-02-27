@@ -1,3 +1,204 @@
-<div class="app-container animate__animated">
-  <p>home works!</p>
+<div class="container text-white mb-2">
+  <div class="row mt-2">
+    <div class="col-xl-12 d-flex justify-content-around mt-4">
+      <div class="display-6 text-white">
+        {{ "bienvenida" | translate }} {{ user.nickname }}
+      </div>
+      <div class="text-center">
+        <div class="fs-6 text-secondary">{{'comienzotemporada' | translate}}</div>
+        <div id="countdown" class="fs-4"></div>
+      </div>
+      <!-- @Output -->
+      <app-show-calendar
+        (calendarEvent)="changeContent($event)"
+      ></app-show-calendar>
+    </div>
+    <div class="col-xl-12 text-center border-bottom border-danger mt-4"></div>
+    <div class="col-xl-12 text-center">
+      <!-- ngClass -->
+      <div [ngClass]="showData === true ? 'row mt-4' : 'd-none'">
+        <div
+          class="col-xl-4 col-md-4 col-sm-12 col-12 border-start border-end border-danger d-flex align-items-center flex-column mb-4"
+        >
+          <div class="fs-3 text-white-50">{{ "tusCircuitos" | translate }}</div>
+          <table
+            mat-table
+            #circuitsTable
+            [dataSource]="circuitsList"
+            class="mt-2"
+          >
+            <ng-container matColumnDef="Nombre">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "nombre" | translate }}
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let element"
+                class="nombreCircuito"
+                (click)="circuitDetails(element.circuitId)"
+              >
+                {{ element.circuitName }}
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCircuits"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumnsCircuits"
+            ></tr>
+          </table>
+
+          <div [ngClass]="circuitsListVisible === true ? 'd-none ' : 'd-block'">
+            <img
+              [src]="'./assets/img/pirelli_wheel.png'"
+              alt=""
+              class="img-loading rotate"
+            />
+          </div>
+        </div>
+        <div
+          class="col-xl-4 col-md-4 col-sm-12 col-12 border-start border-end border-danger d-flex flex-column align-items-center mb-4"
+        >
+          <div class="fs-3 text-white-50">{{ "tusPilotos" | translate }}</div>
+          <table
+            #driversTable
+            mat-table
+            [dataSource]="driversList"
+            class="mt-2"
+          >
+            <ng-container matColumnDef="Nacionalidad">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "pais" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="columnaBandera">
+                <img
+                  class="flag"
+                  [src]="'./assets/img/flags/' + element.nationality + '.png'"
+                  alt=""
+                />
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Nombre">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "nombre" | translate }}
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let element"
+                class="columnaNombre"
+                (click)="driverDetails(element.driverId)"
+              >
+                {{ element.givenName }} {{ element.familyName | uppercase }}
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsDrivers"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumnsDrivers"
+            ></tr>
+          </table>
+          <div [ngClass]="driversListVisible === true ? 'd-none ' : 'd-block'">
+            <img
+              [src]="'./assets/img/pirelli_wheel.png'"
+              alt=""
+              class="img-loading rotate"
+            />
+          </div>
+        </div>
+        <div
+          class="col-xl-4 col-md-4 col-sm-12 col-12 border-start border-end border-danger d-flex flex-column align-items-center mb-4"
+        >
+          <div class="fs-3 text-white-50">
+            {{ "tusConstructores" | translate }}
+          </div>
+          <table
+            #constructorsTable
+            mat-table
+            [dataSource]="constructorsList"
+            class="mt-2"
+          >
+            <ng-container matColumnDef="Nacionalidad">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "pais" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="columnaBandera">
+                <img
+                  class="flag"
+                  [src]="'./assets/img/flags/' + element.nationality + '.png'"
+                  alt=""
+                />
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Nombre">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "nombre" | translate }}
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let element"
+                class="columnaNombre"
+                (click)="constructorDetails(element.constructorId)"
+              >
+                {{ element.name }}
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsDrivers"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumnsDrivers"
+            ></tr>
+          </table>
+          <div
+            [ngClass]="constructorsListVisible === true ? 'd-none ' : 'd-block'"
+          >
+            <img
+              [src]="'./assets/img/pirelli_wheel.png'"
+              alt=""
+              class="img-loading rotate"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        [ngClass]="
+          showCalendar === true
+            ? 'd-flex justify-content-center mt-4'
+            : 'd-none'
+        "
+      >
+
+
+        <div class="mat-elevation-z8 mb-4">
+          <table mat-table class="table-calendar" [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="Date">
+              <th mat-header-cell *matHeaderCellDef> {{'fecha' | translate}}  </th>
+              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef>  {{'nombre' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Circuit">
+              <th mat-header-cell *matHeaderCellDef>  {{'sede' | translate}}  </th>
+              <td mat-cell *matCellDef="let element"> {{element.circuit}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCalendar"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCalendar;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                         showFirstLastButtons
+                         aria-label="Select page of grand prix">
+          </mat-paginator>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

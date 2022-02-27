@@ -1,16 +1,39 @@
-<div id="navbar" [ngClass]="(!show) ? 'd-none' : 'd-block container mt-4 animate__animated animate__fadeInDown'">
-  <ul class="nav nav-pills">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" [routerLink]="['home']" [routerLinkActive]="['active']">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['circuitsCatalogue']" [routerLinkActive]="['active']">Circuits</a>
-    </li>
-    <li class="nav-item">
-      <button (click)="newUser()" class="nav-link" href="">newUser</button>
-    </li>
-    <li class="nav-item">
-      <a (click)="logOut()" class="nav-link" href="#" tabindex="-1" aria-disabled="true">Logout</a>
-    </li>
-  </ul>
+<div class="" *ngIf="isLoggedIn | async as isLoggedIn">
+  <nav class="navbar navbar-expand-lg navbar-light bg-danger justify-content-center">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <span class="text-white">FORMULA | <strong>ONE</strong> | DATABASE</span>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white ms-2" [routerLink]="['home']" [routerLinkActive]="['disabled']">{{ "principal"
+              | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white ms-2" [routerLink]="['circuitsCatalogue']"
+              [routerLinkActive]="['disabled']">{{ "circuitos" | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white ms-2" [routerLink]="['driversCatalogue']" [routerLinkActive]="['disabled']">{{
+              "pilotos" | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white ms-2" [routerLink]="['constructorsCatalogue']"
+              [routerLinkActive]="['disabled']">{{ "constructores" | translate }}</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <img [src]="'./assets/img/language_icons/es.png'" (click)="setLanguage('es')"
+            class="img language-icon spanish" [ngClass]="spanish === true ? 'icon-active' : 'icon-non-active'" />
+          <img [src]="'./assets/img/language_icons/en.png'" (click)="setLanguage('en')"
+            class="img language-icon english" [ngClass]="english === true ? 'icon-active' : 'icon-non-active'" />
+          <a (click)="logOut()" *ngIf="isLoggedIn" class="btn btn-outline-danger" href="#" tabindex="-1"
+            aria-disabled="true">{{ "cerrarSesion" | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </nav>
 </div>

@@ -1,0 +1,7 @@
+<mat-card class="example-card" (click)="driverDetails(d!.driverId)">
+  <mat-card-title-group>
+    <mat-card-title class="fs-5">{{ d?.familyName | uppercase}}</mat-card-title>
+    <mat-card-subtitle>{{d?.givenName}} </mat-card-subtitle>
+    <img mat-card-sm-image src="./assets/img/flags/{{d?.nationality}}.png" >
+  </mat-card-title-group>
+</mat-card>

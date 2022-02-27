@@ -1,0 +1,28 @@
+.img-driver {
+  max-block-size: 3rem;
+  margin-left: 2em;
+  border: 1px solid black;
+
+}
+
+img {
+  width: 6em !important;
+  height: 4.5em;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+mat-card {
+  cursor: pointer !important;
+  width: 300px;
+  margin: 5px;
+}
+
+.race-winner {
+  background-color: rgb(149, 214, 154);
+}
+
+.world-champion {
+  background-color: gold;
+}

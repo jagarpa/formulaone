@@ -1,0 +1,8 @@
+::ng-deep .mat-slider-thumb {
+  transform: scale(0.7) !important;
+}
+
+::ng-deep .mat-slider-horizontal {
+  min-width: 500px !important;
+}
+

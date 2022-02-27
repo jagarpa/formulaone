@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+
+canvas{
+ background-color: #ffffff !important;
+/* width: 500px !important;
+height: 250px !important; */
+
+  color: white;
+}
+
+.chart-container {
+  border-radius: 20px;
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { GlobalConstants } from './common/global-constants';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +10,14 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
 
-
   isLoggedIn = false;
+
+  constructor(private translate: TranslateService){}
+
   ngOnInit(): void {
     this.isLoggedIn = false;
-
   }
 
   title = 'formulaone';
-
-
 
 }

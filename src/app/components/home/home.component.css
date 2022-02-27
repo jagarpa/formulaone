@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+* {
+  font-family: 'Questrial', sans-serif;
+}
+
+.rotate{
+  animation: rotate 3s linear infinite;
+}
+@keyframes rotate{
+  to{ transform: rotate(360deg); }
+}
+
+.img-loading {
+  width: 150px;
+  margin-top: 5em;
+}
+
+.flag {
+  width: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+th.mat-header-cell {
+  text-align: start !important;
+  background-color: #dc3545;
+  color: white;
+  font-size: 12px;
+}
+
+td.mat-cell.columnaNombre {
+  text-align: start !important;
+  cursor: pointer;
+}
+
+td.mat-cell.columnaBandera {
+  text-align: start;
+}
+
+td.mat-cell.nombreCircuito {
+  text-align: start;
+  cursor: pointer;
+}
+
+table {
+  width: 75% !important;
+  background-color: rgb(255, 198, 198);
+  border: 1px solid rgb(211, 61, 61);
+}
+
+th.mat-column-Nacionalidad {
+  width: 10em;
+}
+
+.table-calendar {
+  width: 100% !important;
+}
+
+

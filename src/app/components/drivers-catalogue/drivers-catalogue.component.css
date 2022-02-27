@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+* {
+  font-family: 'Questrial', sans-serif;
+}
+
+.not-empty-select.mat-selected {
+  color: green !important;
+}
+
+::ng-deep .mat-select-value-text {
+  color: rgb(255, 255, 255) !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: blue;
+}
+
+
+.mat-form-field.mat-focused .mat-form-field-ripple{
+  background-color: red !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-select-arrow {
+  color: rgba(255, 0, 0, 0);
+}
+
+::ng-deep .mat-form-field-flex {
+  margin-top: 22px;
+  border: 1px solid white;
+  border-radius: 5px;
+}

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/user';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -8,20 +9,37 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  show: boolean = true;
-  user: User = {name: "Pirlo Minga", email: "prueba@gmail.com", password: "123456", token: "", dni: "22222222"}
 
-  constructor(private usersService: UsersService) {}
+  spanish: boolean = true;
+  english: boolean = false;
 
-  ngOnInit(): void {}
+  isLoggedIn!: Observable<boolean> | undefined;
+  constructor(private usersService: UsersService, private translate: TranslateService) { }
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.usersService.isLoggedIn
+  }
 
   logOut() {
     this.usersService.signOut()
-    localStorage.removeItem('token')
   }
 
-  newUser() {
-    this.usersService.newUser(this.user).subscribe()
-    this.usersService.setDisplayName(this.user.name).subscribe()
+  setLanguage(language: string) {
+    this.translate.setDefaultLang(language)
+    switch (language) {
+      case "es":
+        this.spanish = true;
+        this.english = false;
+        this.translate.use('es')
+        break;
+        case "en":
+          this.spanish = false;
+          this.english = true;
+          this.translate.use('en')
+          break;
+      default:
+        break;
+    }
   }
+
 }

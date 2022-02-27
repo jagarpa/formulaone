@@ -4,7 +4,7 @@ import { ICircuit } from 'src/app/interfaces/icircuit';
 import { timer, filter, fromEvent, Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { observeInsideAngular } from '@angular/fire';
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-circuits-catalogue',
@@ -14,13 +14,13 @@ import { observeInsideAngular } from '@angular/fire';
 export class CircuitsCatalogueComponent implements OnInit {
   constructor(
     public circuits: CircuitsService,
-    private firebase: FirebaseService /* Inyectamos el servicio */
   ) {}
 
   circuitsList: ICircuit[] = [];
   filterSearch: string = '';
   filterYear: string = '';
   likes: string[] = [];
+
 
   ngOnInit(): void {
     this.circuitsAll();
@@ -36,15 +36,10 @@ export class CircuitsCatalogueComponent implements OnInit {
   circuitsAll() {
     this.circuits.getCircuits().subscribe((response) => {
       response.map((element: ICircuit) => {
-        element.image =
-          'assets/img/circuits/logos/' + element.circuitId + '.png';
+        console.log(element)
         this.circuitsList.push(element);
       });
     });
-
-    this.circuitsList.map((e) => {
-
-    })
   }
 
   //Pipe
@@ -79,10 +74,10 @@ export class CircuitsCatalogueComponent implements OnInit {
 
   circuitsSortBy(order: string) {
     switch (order) {
-      case 'id':
+      case 'country':
         this.circuitsList = this.circuitsList.sort((a, b) => {
-          if (a.circuitId.toLowerCase() > b.circuitId.toLowerCase()) return 1;
-          if (a.circuitId.toLowerCase() < b.circuitId.toLowerCase()) return -1;
+          if (a.Location.country.toLowerCase() > b.Location.country.toLowerCase()) return 1;
+          if (a.Location.country.toLowerCase() < b.Location.country.toLowerCase()) return -1;
           return 0;
         });
         break;

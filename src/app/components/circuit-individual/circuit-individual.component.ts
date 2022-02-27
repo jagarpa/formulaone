@@ -11,34 +11,20 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./circuit-individual.component.css'],
 })
 export class CircuitIndividualComponent implements OnInit {
-
+  /* @Input */
   @Input() c: ICircuit | undefined;
+
   like: boolean = false;
 
   faHeart = faHeart;
 
   constructor(private router: Router, private firebase: FirebaseService) {}
 
-  ngOnChanges(): void {
-    this.checkLike()
-  }
-
   ngOnInit(): void {
   }
 
-  checkLike() {
-    this.firebase.getCircuitLikes(this.c?.circuitId).subscribe((e) => {
-      e.map((elemento: string | undefined) => {
-        if (this.c?.circuitId === elemento) {
-          this.c!.like = true;
-        }
-      })
-    })
-  }
-
-
-
   circuitDetails(id: string) {
+    /* Cridar a una ruta per codi */
     this.router.navigate(['/circuitsCatalogue', id]);
   }
 

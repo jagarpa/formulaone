@@ -19,6 +19,7 @@ export class CircuitDetailComponent implements OnInit {
   buttonMessage: string | undefined;
 
   constructor(
+    //ActivatedRoute
     private activatedRoute: ActivatedRoute,
     private circuitService: CircuitsService,
     private firebaseService: FirebaseService
@@ -29,9 +30,10 @@ export class CircuitDetailComponent implements OnInit {
   }
 
   loadCircuit() {
+      //ActivatedRoute
     this.id = this.activatedRoute.snapshot.paramMap.get('id')!; //Recuperamos el Id
     this.firebaseService
-      .getCircuitLikes(this.id)
+      .getCircuitLikes()
       .subscribe((response) => {
         response.indexOf(this.circuit?.circuitId) > -1
           ? this.buttonLikeToTrue()

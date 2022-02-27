@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="row">
+    <div class="col-xl-3 col-md-6 bg-danger vh-100 d-flex justify-content-center align-items-center red-bar">
+      <!--     <div class=" ">
+        <img class="img-pirelli" [src]="'./assets/img/pirelli_wheel.png'">
+      </div> -->
+    </div>
+    <div class="col-xl-9 col-md-6 col-6 bg-dark d-flex align-items-center justify-content-start">
+      <div class="ms-4">
+        <p class="title register">{{ "registro" | translate | uppercase }}</p>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row align-items-center">
+            <div class="col-12"></div>
+            <div class="col-12"></div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-4">
+              <mat-form-field>
+                <input matInput formControlName="fullname" type="text"  placeholder="{{ 'nombre' | translate }}" name="none" />
+                <mat-error *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
+                  <mat-error *ngIf="f['fullname'].errors['required']">No te flipes</mat-error>
+                </mat-error>
+
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field>
+                <input matInput type="text" placeholder="{{ 'nickname' | translate }}" name="none" />
+                <mat-error>{{ "minimo5" | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field>
+                <input matInput type="text" formControlName="email" placeholder="{{ 'email' | translate }}" name="none" />
+                <mat-error class="field-message">{{ 'emailvalido' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-4 mt-4">
+              <mat-form-field>
+                <input matInput type="text" placeholder="{{ 'password' | translate }}" formControlName="password" />
+                <mat-error class="field-message">
+                  {{'passwordcaracteristicas' | translate}}
+                </mat-error>
+                <mat-error *ngIf=""> Please enter your newpassword </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-4 mt-4">
+              <mat-form-field>
+                <input matInput type="text" placeholder="{{ 'repassword' | translate }}"
+                  formControlName="repassword"/>
+                <mat-error ></mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-4">
+              <div class="mt-4">
+                <button mat-raised-button z [disabled]="isDisabled" type="submit">
+                  {{ "newUser" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <p></p>
+          <p></p>
+          <pre class="text-white">
+                     valid: {{ form.valid }}
+           formulari: {{ form.value | json }}
+         </pre>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

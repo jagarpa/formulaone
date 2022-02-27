@@ -1,0 +1,7 @@
+<mat-card class="example-card" (click)="constructorDetails(t!.constructorId)" [ngClass]="checkWinner(t!.constructorId)">
+  <mat-card-title-group>
+    <mat-card-title class="fs-5">{{t?.name}}</mat-card-title>
+    <mat-card-subtitle>{{ checkwinner }}</mat-card-subtitle>
+    <img mat-card-sm-image src="./assets/img/flags/{{t?.nationality}}.png" >
+  </mat-card-title-group>
+</mat-card>

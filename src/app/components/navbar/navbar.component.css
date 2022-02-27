@@ -1,3 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+* {
+  font-family: 'Questrial', sans-serif;
+}
+
 .nav {
   background-color: none;
+}
+
+.nav-link {
+  color: whitesmoke;
+}
+
+.nav-link.disabled {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.301);
+  font-weight: 700;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.language-icon {
+  width: 2em;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.btn-outline-danger {
+  color: white;
+}
+
+.icon-non-active {
+  filter: brightness(50%);
+}
+
+mat-toolbar {
+  background-color: #dc3545;
+  color: white;
 }

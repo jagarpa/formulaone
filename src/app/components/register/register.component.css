@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+* {
+  font-family: 'Questrial', sans-serif;
+}
+
+
+.row {
+  --bs-gutter-x: 0rem !important;
+}
+
+
+
+.red-bar {
+  width: 75px;
+  margin-left: 10em;
+}
+
+
+/* Inputs */
+
+input[type=email], [type=password] {
+  color: white;
+}
+
+/* Buttons */
+
+button {
+  height: 2.5em;
+}
+
+/* errores */
+
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: rgb(197, 197, 197) !important;
+ }
+
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: rgb(158, 158, 158) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: rgb(255, 255, 255) !important;;
+}
+
+/* Texto placeholder */
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgb(255, 255, 255);
+}
+
+::ng-deep .mat-form-field{
+  color:rgb(255, 255, 255);
+}
+
+.mat-form-field {
+
+}
+
+.mat-raised-button {
+
+  background-color: #dc3545;
+  color: white;
+}
+
+.mat-success {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+hr {
+  color: #dc3545;
+  background-color: #dc3545;
+}

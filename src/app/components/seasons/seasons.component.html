@@ -1,0 +1,14 @@
+<mat-slider
+  thumbLabel
+  [displayWith]="formatLabel"
+  [(ngModel)]="value"
+  tickInterval="1"
+  step="1"
+  min="1960"
+  max="2021"
+  aria-label="units"
+  (change)="onSliderChange($event)"
+  ></mat-slider>
+	<mat-form-field class="example-margin">
+    <input matInput type="text" placeholder="Value" [(ngModel)]="value">
+  </mat-form-field>

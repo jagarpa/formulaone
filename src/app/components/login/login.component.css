@@ -1,43 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
-  font-family: 'Questrial', sans-serif;
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
-
-img {
-  margin-top: -30px;
-  margin-right: -30px;
-  width: 22em;
-  animation: rotation 5s infinite linear;
-}
-
-.title {
-  font-size: 8em;
-  color: white;
-}
-
-.database {
-  margin-top: -77px;
-  margin-left: -10px;
-}
-
-.form {
-  margin-top: -35px !important;
+  font-family: 'Exo 2', sans-serif;
 }
 
 .f1 {
-  font-size: 24em;
-  margin-right: -50px !important;
+  font-size: 16em;
+  color: #dc3545;
+  font-weight: 600;
 }
+
+.f1.small {
+  font-size: 10em;
+  font-weight: 600;
+}
+
 
 /* Inputs */
 
@@ -55,11 +33,89 @@ input[type=email], [type=password] {
  position: relative;
 }
 
+
 /* Buttons */
 
 button {
   height: 2.5em;
 }
 
+.mat-raised-button {
+  width: 90%;
+  background-color: #dc3545;
+  color: white;
+}
 
+
+/* errores */
+
+
+.advisor-container {
+  position: absolute;
+  top: 5em;
+
+}
+
+.advisor-1 {
+  background-color: #373542;
+  width: 2.5em;
+}
+
+.img-fia {
+  width: 1.5em;
+  margin: .50em;
+}
+
+.advisor-2 {
+  background-color: black;
+  width: 10em;
+}
+
+.advisor-2-text, .advisor-3-text {
+  font-size: 1em;
+  color: red;
+  font-family: 'Russo One', sans-serif;
+}
+
+.advisor-3 {
+  background-color: #3735428e;
+  width: 25em;
+  border-bottom-right-radius: 15px;
+}
+
+.advisor-3-text {
+  color: rgb(248, 248, 248);
+}
+
+
+/* Fields */
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: rgb(197, 197, 197) !important;
+ }
+
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: rgb(158, 158, 158) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: rgb(255, 255, 255) !important;;
+}
+
+/* Texto placeholder */
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgb(255, 255, 255);
+}
+
+::ng-deep .mat-form-field{
+  color:rgb(255, 255, 255);
+}
+
+.mat-form-field {
+  width: 100%;
+}
 

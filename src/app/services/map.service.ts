@@ -6,6 +6,7 @@ import * as mapboxgl from 'mapbox-gl'
   providedIn: 'root'
 })
 
+/* Servicis */
 export class MapService {
 
   mapbox = (mapboxgl as typeof mapboxgl);

@@ -1,20 +1,7 @@
-<div class="card h-100 text-center" style="width: 20rem">
-  <img [src]="c?.image" class="img-fluid rounded-start" alt="..." />
-
-  <div class="card-body">
-    <h5 class="card-title fs-4">{{ c?.circuitName }}</h5>
-
-    <div>
-      <button
-        class="btn btn-outline-dark ms-2"
-        (click)="circuitDetails(c!.circuitId)"
-      >
-        + información
-      </button>
-    </div>
-
-    <p class="card-text">
-      <small class="text-muted">Id: {{ c?.circuitId }}</small>
-    </p>
-  </div>
-</div>
+<mat-card class="example-card" (click)="circuitDetails(c!.circuitId)">
+  <mat-card-title-group>
+    <!-- Pipes per defecte -->
+    <mat-card-title >{{ c?.circuitName | uppercase}}</mat-card-title>
+    <mat-card-subtitle>{{c?.Location.country}} </mat-card-subtitle>
+  </mat-card-title-group>
+</mat-card>

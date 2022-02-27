@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ICircuit } from '../interfaces/icircuit';
 
+/* Pipe personalitzat*/
 @Pipe({
   name: 'circuitFilter'
 })
