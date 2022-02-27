@@ -16,6 +16,7 @@ export class UsersService {
   constructor(private http: HttpClient) {
    }
 
+  /* Observable amb subject */
   private loggedIn = new BehaviorSubject<boolean>(false)
 
   private firebaseConfig = {
@@ -53,12 +54,14 @@ checkNickname(user: User) {
     const auth = getAuth(this.app)
     localStorage.removeItem("user")
     auth.signOut()
+    /* Observable amb subject */
     this.loggedIn.next(false)
   }
 
   isAuth() {
     const user = localStorage.getItem('user');
     let token = JSON.parse(user!).token;
+       /* Observable amb subject */
     if(token.length > 0) {
       this.loggedIn.next(true)
       return true;

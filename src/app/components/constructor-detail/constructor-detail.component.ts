@@ -28,6 +28,8 @@ export class ConstructorDetailComponent implements OnInit {
     this.firebaseService
       .getConstructorLikes()
       .subscribe((response) => {
+        console.log(response);
+
         response.indexOf(this.cons?.constructorId) > -1
           ? this.buttonLikeToTrue()
           : this.buttonLikeToFalse();
